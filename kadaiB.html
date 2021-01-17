@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>おみくじ</title>
+  <style>
+    body{
+      background-color: #ff7f50;
+    }
+    p{
+      text-align: center;
+      font-size: 20px;
+    }
+    .box{
+      width: 100px;
+      height: 250px;
+      background-color: #faebd7;
+      cursor: pointer;
+      transition: 0.8s;
+      margin: 0 8px 8px 0;
+      text-align: center;
+      line-height: 100px;
+      color: red;
+      display: inline-block;
+      
+
+    }
+    .dai{
+      background: pink;
+      //border-radius: 50%;
+      transform: rotate(360deg);
+      transform: scale(1.2);
+    }
+    .kyo{
+      background: pink;
+      //border-radius: 50%;
+      transform: rotate(360deg);
+    }
+    .lose{
+      transform: scale(0.9);
+    }
+
+
+  </style>
+</head>
+<body>
+  <p>おみくじ2021</p>
+  <br>
+  <script>
+    'use script';
+
+    const num =12;
+    const dai = Math.floor(Math.random() * num);
+    const kyo = Math.floor(Math.random() * num);
+    for(;;){
+      if(kyo == dai){
+        kyo = Math.floor(Math.random() * num);
+      }else{
+        break;
+      }
+    }
+    var x = true;
+    var p = null;
+    for(let i=0; i<num; i++){
+      const div = document.createElement('div');
+      div.id="omikuji";
+      div.classList.add('box');
+
+      div.addEventListener('click', () => {
+        if(i == dai){
+          div.textContent="大吉";
+          div.classList.add('dai');
+        }else if(i == kyo){
+          div.textContent="凶";
+          div.classList.add('kyo');
+        }else{
+          const kiti = Math.floor(Math.random() * 2);
+          if(kiti == 0){
+            div.textContent="吉";
+            div.classList.add('lose');
+          }else{
+            div.textContent="小吉";
+            div.classList.add('lose');
+          }
+        }
+        if(x){
+          var p = document.createElement('p');
+          p.textContent="あなたの運勢は"+div.textContent+"です。";
+          x = false;
+          document.body.appendChild(p);
+        }
+
+      });
+      document.body.appendChild(div);
+
+    }
+
+
+  </script>
+</body>
+</html>
